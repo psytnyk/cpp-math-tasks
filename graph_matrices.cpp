@@ -1,4 +1,6 @@
 #include <iostream>
+#include <iomanip>
+#include <string>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -11,7 +13,8 @@ int main()
 #endif
     int v, e;
     char t;
-    cout << "Графи" << endl;
+
+    cout << "Матриці графа\n";
 
     cout << "К-ть вершин: ";
     cin >> v;
@@ -25,6 +28,7 @@ int main()
     for (int i = 0; i < e; i++)
     {
         int a, b;
+        cout << "Ребро " << i + 1 << ": ";
         cin >> a >> b;
         a--;
         b--;
@@ -42,24 +46,56 @@ int main()
             inc[a][i] = inc[b][i] = 1;
         }
     }
-    cout << "\nСуміжність:\n";
+
+    cout << "\nМатриця суміжності:\n";
+    cout << "      │";
+    for (int j = 0; j < v; j++)
+    {
+        cout << setw(4) << ("v" + to_string(j + 1));
+    }
+    cout << endl;
+    cout << "──────┼";
+    for (int j = 0; j < v; j++)
+    {
+        cout << "────";
+    }
+    cout << endl;
     for (int i = 0; i < v; i++)
     {
+        cout << setw(5) << ("v" + to_string(i + 1)) << " │";
         for (int j = 0; j < v; j++)
         {
-            cout << adj[i][j] << " ";
+            cout << setw(4) << adj[i][j];
         }
         cout << endl;
     }
 
-    cout << "\nІнцидентність:\n";
+    cout << "\nМатриця інцидентності:\n";
+    cout << "      │";
+    for (int j = 0; j < e; j++)
+    {
+        cout << setw(4) << ("e" + to_string(j + 1));
+    }
+    cout << endl;
+    cout << "──────┼";
+    for (int j = 0; j < e; j++)
+    {
+        cout << "────";
+    }
+    cout << endl;
     for (int i = 0; i < v; i++)
     {
+        cout << setw(5) << ("v" + to_string(i + 1)) << " │";
         for (int j = 0; j < e; j++)
         {
-            cout << inc[i][j] << " ";
+            cout << setw(4) << inc[i][j];
         }
         cout << endl;
+    }
+
+    if (t == 'o')
+    {
+        cout << "\n 1 - ребро виходить із вершини, -1 - ребро входить у вершину\n";
     }
 
     return 0;
